@@ -9,6 +9,8 @@ class Pub
         @till = 0
     end
 
-    
+    def total_drinks
+        return @drinks.length
+    end
 
 end

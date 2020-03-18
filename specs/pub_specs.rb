@@ -23,4 +23,8 @@ class PubTest < Minitest::Test
     def test_002_get_till_amount
         assert_equal(0, @pub.till)
     end
+
+    def test_003_get_total_drinks
+        assert_equal(3,@pub.total_drinks)
+    end
 end
