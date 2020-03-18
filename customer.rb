@@ -25,7 +25,7 @@ class Customer
     end
 
     def buy_drink(pub,drink)
-        if @age >= 18
+        if @age >= 18 && @drunk_gauge < 100
             remove_cash(drink)
             add_drink(drink)
             pub.add_to_till(drink)

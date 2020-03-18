@@ -17,6 +17,7 @@ class CustomerTest < Minitest::Test
         @drinks = [@drink1,@drink2]
         @customer1 = Customer.new("Fred",100, 18)
         @customer2 = Customer.new("Frank", 100, 8)
+        @customer3 = Customer.new("Fanny", 100, 19)
         @pub = Pub.new("The Kings Lost Arm",@drinks)
     end
 
@@ -67,5 +68,12 @@ class CustomerTest < Minitest::Test
     def test_009_add_to_drunk_gauge_of_customer
         @customer1.add_drink(@drink1)
         assert_equal(10,@customer1.drunk_gauge)
+    end
+
+    def test_010_customer_buys_drink_from_pub_entoxicated
+        @customer3.buy_drink(@pub, @drink2)
+        @customer3.buy_drink(@pub, @drink2)
+
+        assert_equal(1,@customer3.total_drinks)
     end
 end
