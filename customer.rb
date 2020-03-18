@@ -9,8 +9,8 @@ class Customer
         @drinks = []
     end
 
-    def remove_cash(deduct_amount)
-        @wallet -= deduct_amount
+    def remove_cash(drink)
+        @wallet -= drink.price
     end
 
     def total_drinks
@@ -19,5 +19,12 @@ class Customer
 
     def add_drink(drink)
         @drinks.push(drink)
+    end
+
+    def buy_drink(pub,drink)
+        remove_cash(drink)
+        add_drink(drink)
+        pub.add_to_till(drink)
+        pub.remove_drink(drink)
     end
 end

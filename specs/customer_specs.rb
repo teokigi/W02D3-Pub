@@ -16,6 +16,7 @@ class CustomerTest < Minitest::Test
         @drink2 = Drink.new("Beer",5)
         @drinks = [@drink1,@drink2]
         @customer1 = Customer.new("Fred",100)
+        @pub = Pub.new("The Kings Lost Arm",@drinks)
     end
 
     def test_001_get_name_of_customer
@@ -27,8 +28,8 @@ class CustomerTest < Minitest::Test
     end
 
     def test_003_remove_cash_from_wallet
-        @customer1.remove_cash(5)
-        assert_equal(95,@customer1.wallet)
+        @customer1.remove_cash(@drink1)
+        assert_equal(90,@customer1.wallet)
     end
 
     def test_004_total_drinks
@@ -41,6 +42,11 @@ class CustomerTest < Minitest::Test
     end
 
     def test_006_customer_buys_drink_from_pub
+        @customer1.buy_drink(@pub, @drink1)
 
+        assert_equal(90,@customer1.wallet)
+        assert_equal(1,@customer1.total_drinks)
+        assert_equal(1,@pub.total_drinks)
+        assert_equal(10,@pub.till)
     end
 end
