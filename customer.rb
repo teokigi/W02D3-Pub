@@ -13,5 +13,11 @@ class Customer
         @wallet -= deduct_amount
     end
 
-    
+    def total_drinks
+        return @drinks.length()
+    end
+
+    def add_drink(drink)
+        @drinks.push(drink)
+    end
 end
