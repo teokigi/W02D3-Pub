@@ -12,8 +12,8 @@ class CustomerTest < Minitest::Test
 #increase the money in the pubs till
     def setup
 
-        @drink1 = Drink.new("Vodka",10)
-        @drink2 = Drink.new("Beer",5)
+        @drink1 = Drink.new("Vodka",10,10)
+        @drink2 = Drink.new("Beer",5,500)
         @drinks = [@drink1,@drink2]
         @customer1 = Customer.new("Fred",100, 18)
         @customer2 = Customer.new("Frank", 100, 8)
@@ -58,5 +58,14 @@ class CustomerTest < Minitest::Test
         assert_equal(0,@customer1.total_drinks)
         assert_equal(2,@pub.total_drinks)
         assert_equal(0,@pub.till)
+    end
+
+    def test_008_check_customer_drunk_level
+        assert_equal(0,@customer1.drunk_gauge)
+    end
+
+    def test_009_add_to_drunk_gauge_of_customer
+        @customer1.add_drink(@drink1)
+        assert_equal(10,@customer1.drunk_gauge)
     end
 end

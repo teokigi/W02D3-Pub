@@ -1,6 +1,6 @@
 class Customer
 
-    attr_reader :name, :wallet
+    attr_reader :name, :wallet, :drunk_gauge
 
     def initialize(name,cash_on_hand,age)
 #should have a name and a wallet
@@ -8,6 +8,7 @@ class Customer
         @wallet = cash_on_hand
         @drinks = []
         @age = age
+        @drunk_gauge = 0
     end
 
     def remove_cash(drink)
@@ -20,6 +21,7 @@ class Customer
 
     def add_drink(drink)
         @drinks.push(drink)
+        @drunk_gauge += drink.alcohol_level
     end
 
     def buy_drink(pub,drink)
