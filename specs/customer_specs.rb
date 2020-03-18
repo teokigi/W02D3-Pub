@@ -17,11 +17,10 @@ class CustomerTest < Minitest::Test
         @drink2 = Drink.new("Beer",5,500)
         @drinks = [@drink1,@drink2]
         @food1 = Food.new("crisps",10,10)
-        @food2 = Food.new("nuts",5,5)
+        @food2 = Food.new("nuts",5,100)
         @foods = [@food1,@food2]
         @customer1 = Customer.new("Fred",100, 18)
         @customer2 = Customer.new("Frank", 100, 8)
-        @customer3 = Customer.new("Fanny", 100, 19)
         @pub = Pub.new("The Kings Lost Arm",@drinks,@foods)
     end
 
@@ -75,10 +74,10 @@ class CustomerTest < Minitest::Test
     end
 
     def test_010_customer_buys_drink_from_pub_entoxicated
-        @customer3.buy_drink(@pub, @drink2)
-        @customer3.buy_drink(@pub, @drink2)
+        @customer1.buy_drink(@pub, @drink2)
+        @customer1.buy_drink(@pub, @drink2)
 
-        assert_equal(1,@customer3.total_drinks)
+        assert_equal(1,@customer1.total_drinks)
     end
 
     def test_011_total_foods
@@ -88,5 +87,15 @@ class CustomerTest < Minitest::Test
     def test_012_add_foods
         @customer1.add_food(@food1)
         assert_equal(1,@customer1.total_foods)
+    end
+
+    def test_013_buy_food_for_customer
+        @customer1.buy_drink(@pub,@drink2)
+        @customer1.buy_food(@pub,@food2)
+        assert_equal(90,@customer1.wallet)
+        assert_equal(1,@customer1.total_foods)
+        assert_equal(1,@pub.total_foods)
+        assert_equal(10,@pub.till)
+        assert_equal(400,@customer1.drunk_gauge)
     end
 end

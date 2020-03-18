@@ -42,4 +42,11 @@ class Customer
         @foods.push(food)
         @drunk_gauge -= food.rejuvenation_level
     end
+
+    def buy_food(pub,food)
+        remove_cash(food)
+        add_food(food)
+        pub.add_to_till(food)
+        pub.remove_food(food)
+    end
 end
