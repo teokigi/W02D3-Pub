@@ -5,6 +5,7 @@ Minitest::Reporters::SpecReporter.new
 require_relative('../customer.rb')
 require_relative('../drink.rb')
 require_relative('../pub.rb')
+require_relative('../food.rb')
 
 class CustomerTest < Minitest::Test
 # should be able to buy a drink from the pub
@@ -15,10 +16,13 @@ class CustomerTest < Minitest::Test
         @drink1 = Drink.new("Vodka",10,10)
         @drink2 = Drink.new("Beer",5,500)
         @drinks = [@drink1,@drink2]
+        @food1 = Food.new("crisps",10,10)
+        @food2 = Food.new("nuts",5,5)
+        @foods = [@food1,@food2]
         @customer1 = Customer.new("Fred",100, 18)
         @customer2 = Customer.new("Frank", 100, 8)
         @customer3 = Customer.new("Fanny", 100, 19)
-        @pub = Pub.new("The Kings Lost Arm",@drinks)
+        @pub = Pub.new("The Kings Lost Arm",@drinks,@foods)
     end
 
     def test_001_get_name_of_customer
@@ -75,5 +79,14 @@ class CustomerTest < Minitest::Test
         @customer3.buy_drink(@pub, @drink2)
 
         assert_equal(1,@customer3.total_drinks)
+    end
+
+    def test_011_total_foods
+        assert_equal(0,@customer1.total_foods)
+    end
+
+    def test_012_add_foods
+        @customer1.add_food(@food1)
+        assert_equal(1,@customer1.total_foods)
     end
 end

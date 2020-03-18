@@ -5,16 +5,20 @@ Minitest::Reporters::SpecReporter.new
 require_relative('../customer.rb')
 require_relative('../drink.rb')
 require_relative('../pub.rb')
+require_relative('../food.rb')
 
 class PubTest < Minitest::Test
 #increase the money in the pubs till
     def setup
-        @drink1 = Drink.new("Vodka",10)
-        @drink2 = Drink.new("Beer",20)
-        @drink3 = Drink.new("Gin",5)
+        @drink1 = Drink.new("Vodka",10,10)
+        @drink2 = Drink.new("Beer",20,5)
+        @drink3 = Drink.new("Gin",5,30)
         @drinks = [@drink1,@drink2,@drink3]
-        @customer = Customer.new("Frank",100)
-        @pub = Pub.new("The Kings Lost Arm", @drinks)
+        @food1 = Food.new("crisps",10,10)
+        @food2 = Food.new("nuts",5,50)
+        @foods = [@food1,@food2]
+        @customer = Customer.new("Frank",100,18)
+        @pub = Pub.new("The Kings Lost Arm", @drinks, @foods)
 
     end
 
@@ -30,7 +34,7 @@ class PubTest < Minitest::Test
         assert_equal(3,@pub.total_drinks)
     end
 
-    def test_004_add_to_till
+    def test_004_add_drink_to_till
         @pub.add_to_till(@drink1)
         assert_equal(10,@pub.total_cash)
     end
@@ -40,5 +44,17 @@ class PubTest < Minitest::Test
         assert_equal("Vodka",drink.name)
     end
 
+    def test006_get_total_foods
+        assert_equal(2,@pub.total_foods)
+    end
 
+    def test_007_add_food_to_till
+        @pub.add_to_till(@food1)
+        assert_equal(10,@pub.total_cash)
+    end
+
+    def test_008_remove_food
+        food = @pub.remove_food(@food1)
+        assert_equal("crisps",food.name)
+    end
 end

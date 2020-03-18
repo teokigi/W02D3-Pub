@@ -9,14 +9,15 @@ class Customer
         @drinks = []
         @age = age
         @drunk_gauge = 0
+        @foods = []
     end
 
-    def remove_cash(drink)
-        @wallet -= drink.price
+    def remove_cash(item)
+        @wallet -= item.price
     end
 
     def total_drinks
-        return @drinks.length()
+        return @drinks.length
     end
 
     def add_drink(drink)
@@ -31,5 +32,14 @@ class Customer
             pub.add_to_till(drink)
             pub.remove_drink(drink)
         end
+    end
+
+    def total_foods
+        return @foods.length
+    end
+
+    def add_food(food)
+        @foods.push(food)
+        @drunk_gauge -= food.rejuvenation_level
     end
 end
