@@ -9,8 +9,7 @@ require_relative('../pub.rb')
 class DrinkTest < Minitest::Test
 
     def setup
-        @drink1 =  Drink.new("Vodka",10)
-
+        @drink1 =  Drink.new("Vodka",10,10)
     end
 
     def test_001_get_drink_name
@@ -19,5 +18,9 @@ class DrinkTest < Minitest::Test
 
     def test_002_get_drink_price
         assert_equal(10,@drink1.price)
+    end
+
+    def test_003_alcoholic_content
+        assert_equal(10,@drink1.alcohol_level)
     end
 end
