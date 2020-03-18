@@ -13,4 +13,16 @@ class Pub
         return @drinks.length
     end
 
+    def add_to_till(drink)
+        @till += drink.price
+    end
+
+    def total_cash
+        return @till
+    end
+
+    def remove_drink(drink)
+        return @drinks.delete(drink)
+    end
+
 end

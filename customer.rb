@@ -6,10 +6,12 @@ class Customer
 #should have a name and a wallet
         @name = name
         @wallet = cash_on_hand
+        @drinks = []
     end
 
     def remove_cash(deduct_amount)
         @wallet -= deduct_amount
     end
 
+    
 end
